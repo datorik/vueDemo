@@ -24,13 +24,13 @@ import SettingsContainer from '@/components/SettingsContainer.vue'; // @ is an a
   },
   methods:{
     setTemp(val) {
-      this.temp = val;
+      (<any>this).temp = val;
     },
     timesOfDay(val) {
-       this.$emit('timesOfDay', val)
+      (<any>this).$emit('timesOfDay', val)
     },
     searchWeather(val) {
-      this.cityId = val.id;
+      (<any>this).cityId = val.id;
     }
   }
 })

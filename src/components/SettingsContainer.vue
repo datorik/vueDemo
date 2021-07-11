@@ -43,11 +43,10 @@ export default {
     },
     methods: {
         temp(val: any): void {
-            this.$emit('setTemp', this.tempSettings)
+            (<any>this).$emit('setTemp', (<any>this).tempSettings)
         },
         timesOfDay(val: any): void {
-
-            this.$emit("timesOfDay", this.dayNight)
+            (<any>this).$emit("timesOfDay", (<any>this).dayNight)
         },
     }
 }

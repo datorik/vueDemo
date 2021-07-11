@@ -12,14 +12,15 @@
   import { Component, Vue } from 'vue-property-decorator';
 
   @Component({
+
     data() {
       return {
-        dayNight:'day'
+        dayNight: 'day',
       }
     },
     methods:{
-      timesOfDay(val) {
-        this.dayNight = val;
+      timesOfDay(val: string) {
+        (<any>this).dayNight = val;
       }
     }
   })

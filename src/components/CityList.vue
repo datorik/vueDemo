@@ -24,7 +24,7 @@
 
   import vSelect from 'vue-select'
   import 'vue-select/dist/vue-select.css';
-  import cityData from '@/assets/city.list.json'
+  import cityData from '../assets/city.list.json'
 
 export default {
   components: {
@@ -56,8 +56,8 @@ export default {
       }
 
       if(result.length){
-        me.$data.select = result[0];
-        me.$emit('searchWeather',  result[0]);
+        (<any>me).$data.select = result[0];
+        (<any>me).$emit('searchWeather',  result[0]);
       }
     }
 
@@ -65,41 +65,41 @@ export default {
   },
   methods: {
     searchEvent (val:string):void {
-      this.search = val;
-      this.page = 0;
+      (<any>this).search = val;
+      (<any>this).page = 0;
     },
 
     getCitys ():any {
-      const search:string = this.search;
+      const search:string = (<any>this).search;
       function isPositive(element:any) {
         return element.name.includes(search);
       }
       let result:any = cityData.filter(isPositive);
-      let pageStart: number = this.page * this.limit;
-      let pageAnd: number = pageStart + this.limit;
+      let pageStart: number = (<any>this).page * (<any>this).limit;
+      let pageAnd: number = pageStart + (<any>this).limit;
 
-      result.length > pageAnd ? this.showNext = true: this.showNext = false;
-      pageStart != 0 ? this.showPrev = true: this.showPrev = false;
+      result.length > pageAnd ? (<any>this).showNext = true: (<any>this).showNext = false;
+      pageStart != 0 ? (<any>this).showPrev = true: (<any>this).showPrev = false;
       return result.slice(pageStart,pageAnd);
     },
 
     nextPage ():void {
-      this.page++;
+      (<any>this).page++;
     },
 
     prevPage ():void {
-      this.page--;
+      (<any>this).page--;
     },
     input(val: any): void {
-      this.select = val;
+      (<any>this).select = val;
       if (val) {
-        this.$emit('searchWeather', val);
+        (<any>this).$emit('searchWeather', val);
       }
     },
   },
   computed: {
     label():any {
-      return this.getCitys();
+      return (<any>this).getCitys();
     }
   }
 }

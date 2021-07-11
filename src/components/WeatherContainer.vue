@@ -67,12 +67,12 @@ export default {
 
     methods: {
         getWeather(): void {
-            if (!this.cityId) {
+            if (!(<any>this).cityId) {
                 return;
             }
-            this.loading = true;
-            this.show = false;
-            fetch(`${OPENWEATHERMAP_URL}?id=${this.cityId}&appid=${API_KEY}&units=${this.temp}`)
+          (<any>this).loading = true;
+          (<any>this).show = false;
+            fetch(`${OPENWEATHERMAP_URL}?id=${(<any>this).cityId}&appid=${API_KEY}&units=${(<any>this).temp}`)
                 .then((response) => {
                     if (response.ok) {
                         return response.json();
@@ -80,15 +80,15 @@ export default {
                     throw new Error('Network response was not ok');
                 })
                 .then((json) => {
-                    this.loading = false;
-                    this.show = true;
-                    this.name = json.name;
-                    this.main = json.main;
-                    this.icon = json.weather[0].icon;
-                    this.iconText = json.weather[0].main;
+                  (<any>this).loading = false;
+                  (<any>this).show = true;
+                  (<any>this).name = json.name;
+                  (<any>this).main = json.main;
+                  (<any>this).icon = json.weather[0].icon;
+                  (<any>this).iconText = json.weather[0].main;
                 })
                 .catch((error) => {
-                    this.loading = false;
+                  (<any>this).loading = false;
                     console.log(error);
                 });
         }
@@ -98,10 +98,10 @@ export default {
     },
     watch: {
         cityId(): void {
-            this.getWeather()
+          (<any>this).getWeather()
         },
         temp(): void {
-            this.getWeather()
+          (<any>this).getWeather()
         }
     }
 }
