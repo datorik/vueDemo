@@ -2,11 +2,13 @@
   <div class="lds-dual-ring"></div>
 </template>
 
-<style>
+<style lang="scss">
+  @import "../assets/colors";
   .lds-dual-ring {
     display: inline-block;
     width: 64px;
     height: 64px;
+    margin-top: 50px;
   }
   .lds-dual-ring:after {
     content: " ";
@@ -15,8 +17,8 @@
     height: 46px;
     margin: 1px;
     border-radius: 50%;
-    border: 5px solid #cef;
-    border-color: #cef transparent #cef transparent;
+    border: 5px solid $element-color;
+    border-color: $element-color transparent $element-color transparent;
     animation: lds-dual-ring 1.2s linear infinite;
   }
   @keyframes lds-dual-ring {

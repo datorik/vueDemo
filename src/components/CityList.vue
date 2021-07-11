@@ -1,14 +1,16 @@
 <template>
   <div class="cityContainer" id="cityContainer">
-    <h1>Vue Select</h1>
+    <h1 class="cityContainer__title">Select City</h1>
     <vSelect
-            :options="label" label="name"
+            class="cityContainer__input"
+            :options="label"
+            label="name"
             @search="searchEvent"
             @input="input"
             :filterable="false">
       <li slot="list-footer" class="pagination">
-        <button @click="prevPage" :disabled="!showPrev">Prev</button>
-        <button @click="nextPage" :disabled="!showNext">Next</button>
+        <button @click="prevPage" :disabled="!showPrev" class="pagination__button">Prev</button>
+        <button @click="nextPage" :disabled="!showNext" class="pagination__button">Next</button>
       </li>
     </vSelect>
 
@@ -35,7 +37,7 @@
         page: 0,
         limit: 10,
         showNext: false,
-        showPrev: false
+        showPrev: false,
       }
     },
     methods: {
@@ -82,19 +84,33 @@
 
 
 
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style scoped lang="sass">
+  @import "../assets/colors"
+  .cityContainer
+    &__input
+      padding: 5px 0px
+      margin: auto
+      @media only screen and (min-width: 600px)
+        max-width: 360px
+
+
+  .pagination
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    &__button
+      background-color: $element-color
+      color: #ffffff
+      padding: 2px 10px
+      border-radius: 5px
+      margin: 0 20px
+    &__button:disabled
+      background-color: #b3bfd2
+
+
+
+
+
+
 </style>

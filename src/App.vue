@@ -1,22 +1,59 @@
 <template>
-  <div id="app">
+  <div id="app" :class="[dayNight]">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view v-on:timesOfDay="timesOfDay"/>
   </div>
 </template>
 
+<script lang="ts">
+  import { Component, Vue } from 'vue-property-decorator';
+  import EventBus from '@/path/to/bus'
+
+  @Component({
+    data() {
+      return {
+        dayNight:'day'
+      }
+    },
+    methods:{
+      timesOfDay(val) {
+        this.dayNight = val;
+      }
+    }
+  })
+  export default class Home extends Vue {}
+</script>
+
 <style lang="scss">
+  @import "/assets/colors";
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  height: 100%;
+
+}
+.day {
+  color: $main-color-day;
+  background-color: $main-bg-day;
 }
 
+.night {
+  color: $main-color-night;
+  background-color: $main-bg-night;
+}
 #nav {
   padding: 30px;
 
@@ -25,7 +62,7 @@
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: $element-color;
     }
   }
 }

@@ -2,38 +2,38 @@
   <div class="cityContainer" id="weatherContainer">
     <Loader v-if="loading" />
 
-    <div v-if="show">
+    <div v-if="show" >
       <h1>{{name}}</h1>
-      <div>
-        <div>
+      <div class="weather">
+        <div class="weather__item">
           <samp>Feels Like</samp>
-          <samp>{{main.feels_like}}</samp>
+          <samp class="weather__text--big">{{main.feels_like}}</samp>
         </div>
-        <div>
+        <div class="weather__item">
           <samp>Humidity</samp>
-          <samp>{{main.humidity}}</samp>
+          <samp class="weather__text--big">{{main.humidity}}</samp>
         </div>
-        <div>
+        <div class="weather__item">
           <samp>Pressure</samp>
-          <samp>{{main.pressure}}</samp>
+          <samp class="weather__text--big">{{main.pressure}}</samp>
         </div>
       </div>
       <div class="weatherIcon">
-<!--        <div class="weatherIcon__image" style=" url(http://openweathermap.org/img/wn/{{icon}})"></div>-->
         <div class="weatherIcon__image" v-bind:style="{backgroundImage: 'url(http://openweathermap.org/img/wn/'+ icon + '@2x.png'}"></div>
+        <div class="weatherIcon__text">{{iconText}} </div>
       </div>
-      <div>
-        <div>
+      <div class="weather">
+        <div class="weather__item">
           <samp>Min</samp>
-          <samp>{{main.temp_min}}</samp>
+          <samp class="weather__text--big">{{main.temp_min}}</samp>
         </div>
-        <div>
-          <samp>Temp</samp>
-          <samp>{{main.temp}}</samp>
+        <div class="weather__item">
+          <samp >Temp</samp>
+          <samp class="weather__text--big2">{{main.temp}}</samp>
         </div>
-        <div>
+        <div class="weather__item">
           <samp>Max</samp>
-          <samp>{{main.temp_max}}</samp>
+          <samp class="weather__text--big">{{main.temp_max}}</samp>
         </div>
 
       </div>
@@ -47,7 +47,6 @@
 <script lang="ts">
 const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
 
-  import {Prop, Vue} from "vue-property-decorator";
   import Loader from '@/components/Loader.vue'
   export default {
 
@@ -59,6 +58,8 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
         show: false,
         name:'',
         main:'',
+        icon:'',
+        iconText:''
       }
     },
 
@@ -71,12 +72,10 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
         this.loading = true;
         this.show = false;
         fetch(`http://api.openweathermap.org/data/2.5/weather?id=${this.cityId}&appid=${API_KEY}&units=${this.temp}`)
-
                 .then((response) => {
                   if(response.ok) {
                     return response.json();
                   }
-
                   throw new Error('Network response was not ok');
                 })
                 .then((json) => {
@@ -85,6 +84,7 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
                   this.name = json.name;
                   this.main = json.main;
                   this.icon = json.weather[0].icon;
+                  this.iconText = json.weather[0].main;
                   console.log(this.icon);
                 })
                 .catch((error) => {
@@ -114,13 +114,34 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
 
 
 
-<style scoped lang="scss">
+<style scoped lang="sass">
 
-  .weatherIcon__image{
-    height: 160px;
-    width: 160px;
-    background-size: cover;
-    margin: auto
-  }
+  .weather
+    display: flex
+    align-items: center
+    justify-content: center
+    &__item
+      display: flex
+      flex-direction: column
+      flex-wrap: wrap
+      padding: 0 5px
+    &__text
+      &--big
+        font-size: 1.5rem
+      &--big2
+        font-size: 2.2rem
+
+
+  .weatherIcon
+    padding: 0 0 26px 0
+    &__image
+      height: 160px
+      width: 160px
+      background-size: cover
+      margin: auto
+    &__text
+      margin-top: -30px
+      font-size: 2rem
+
 
 </style>

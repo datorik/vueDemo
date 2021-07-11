@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <CityList @searchWeather="searchWeather"></CityList >
-    <SettingsContainer @setTemp="setTemp" ></SettingsContainer>
+    <SettingsContainer @setTemp="setTemp" @timesOfDay="timesOfDay"></SettingsContainer>
     <WeatherContainer v-bind:cityId="cityId" v-bind:temp="temp"></WeatherContainer>
   </div>
 </template>
@@ -26,6 +26,9 @@ import SettingsContainer from '@/components/SettingsContainer.vue'; // @ is an a
   methods:{
     setTemp(val) {
       this.temp = val;
+    },
+    timesOfDay(val) {
+       this.$emit('timesOfDay', val)
     },
     searchWeather(val) {
       this.cityId = val.id;
