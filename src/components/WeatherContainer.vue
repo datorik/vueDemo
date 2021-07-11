@@ -68,7 +68,6 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
         if(!this.cityId){
           return;
         }
-        console.log(this.temp);
         this.loading = true;
         this.show = false;
         fetch(`http://api.openweathermap.org/data/2.5/weather?id=${this.cityId}&appid=${API_KEY}&units=${this.temp}`)
@@ -85,7 +84,6 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
                   this.main = json.main;
                   this.icon = json.weather[0].icon;
                   this.iconText = json.weather[0].main;
-                  console.log(this.icon);
                 })
                 .catch((error) => {
                   this.loading = false;

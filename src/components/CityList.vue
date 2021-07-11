@@ -4,6 +4,7 @@
     <vSelect
             class="cityContainer__input"
             :options="label"
+            :value="select"
             label="name"
             @search="searchEvent"
             @input="input"
@@ -31,7 +32,7 @@
     },
     data() {
       return {
-        select: {state: 'Florida', abbr: 'FL'},
+        select: null,
         search: '',
         offset: 0,
         page: 0,
@@ -39,6 +40,30 @@
         showNext: false,
         showPrev: false,
       }
+    },
+    mounted() {
+      let me = this;
+      function showPosition(position:any) {
+        let lat = position.coords.latitude.toFixed(6);
+        let lon = position.coords.longitude.toFixed(6);
+
+        lon = 47.159401;
+        lat =  34.330502;
+
+
+        let result:any = cityData.filter(isPositive);
+        function isPositive(element:any) {
+          return (element.coord.lon == lon && element.coord.lat == lat)
+        }
+
+        if(result.length){
+          me.$data.select = result[0];
+          me.$emit('searchWeather',  result[0]);
+        }
+
+      }
+
+      navigator.geolocation.getCurrentPosition(showPosition);
     },
     methods: {
       searchEvent (val:string):void {
@@ -69,7 +94,8 @@
       },
       input(val: any): void {
         if (val) {
-          this.$emit('searchWeather', val)
+          this.select = val;
+          this.$emit('searchWeather', val);
         }
       },
     },

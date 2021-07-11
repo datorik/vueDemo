@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import CityList from '@/components/CityList.vue'; // @ is an alias to /src
 import WeatherContainer from '@/components/WeatherContainer.vue'; // @ is an alias to /src
 import SettingsContainer from '@/components/SettingsContainer.vue'; // @ is an alias to /src
