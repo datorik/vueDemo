@@ -32,30 +32,26 @@
     </div>
 </template>
 
-
 <script lang="ts">
 
-    export default {
-
-        data() {
-            return {
-                tempSettings: 'metric',
-                dayNight: 'day'
-            }
-        },
-
-        methods: {
-            temp(val: any): void {
-                this.$emit('setTemp', this.tempSettings)
-            },
-            timesOfDay(val: any): void {
-
-                this.$emit("timesOfDay", this.dayNight)
-            },
+export default {
+    data() {
+        return {
+            tempSettings: 'metric',
+            dayNight: 'day'
         }
-    }
-</script>
+    },
+    methods: {
+        temp(val: any): void {
+            this.$emit('setTemp', this.tempSettings)
+        },
+        timesOfDay(val: any): void {
 
+            this.$emit("timesOfDay", this.dayNight)
+        },
+    }
+}
+</script>
 
 <style scoped lang="sass">
     @import "../assets/colors"
@@ -119,6 +115,4 @@
             -webkit-transform: translateX(26px)
             -ms-transform: translateX(26px)
             transform: translateX(26px)
-
-
 </style>

@@ -46,71 +46,66 @@
 
 <script lang="ts">
 const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
+const OPENWEATHERMAP_URL: string = 'http://api.openweathermap.org/data/2.5/weather';
 
-  import Loader from '@/components/Loader.vue'
-  export default {
+import Loader from '@/components/Loader.vue'
 
-    props:['cityId', 'temp'],
+export default {
+
+    props: ['cityId', 'temp'],
 
     data() {
-      return {
-        loading: false,
-        show: false,
-        name:'',
-        main:'',
-        icon:'',
-        iconText:''
-      }
+        return {
+            loading: false,
+            show: false,
+            name: '',
+            main: '',
+            icon: '',
+            iconText: ''
+        }
     },
 
     methods: {
-      getWeather: function(){
-        if(!this.cityId){
-          return;
-        }
-        this.loading = true;
-        this.show = false;
-        fetch(`http://api.openweathermap.org/data/2.5/weather?id=${this.cityId}&appid=${API_KEY}&units=${this.temp}`)
+        getWeather(): void {
+            if (!this.cityId) {
+                return;
+            }
+            this.loading = true;
+            this.show = false;
+            fetch(`${OPENWEATHERMAP_URL}?id=${this.cityId}&appid=${API_KEY}&units=${this.temp}`)
                 .then((response) => {
-                  if(response.ok) {
-                    return response.json();
-                  }
-                  throw new Error('Network response was not ok');
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok');
                 })
                 .then((json) => {
-                  this.loading = false;
-                  this.show = true;
-                  this.name = json.name;
-                  this.main = json.main;
-                  this.icon = json.weather[0].icon;
-                  this.iconText = json.weather[0].main;
+                    this.loading = false;
+                    this.show = true;
+                    this.name = json.name;
+                    this.main = json.main;
+                    this.icon = json.weather[0].icon;
+                    this.iconText = json.weather[0].main;
                 })
                 .catch((error) => {
-                  this.loading = false;
-                  console.log(error);
+                    this.loading = false;
+                    console.log(error);
                 });
-
-      }
+        }
     },
-
     components: {
-      Loader
+        Loader
     },
     watch: {
-      cityId: function(){
-        this.getWeather()
-      },
-      temp: function(){
-        this.getWeather()
-      }
-
+        cityId(): void {
+            this.getWeather()
+        },
+        temp(): void {
+            this.getWeather()
+        }
     }
-
-  }
+}
 </script>
-
-
-
 
 <style scoped lang="sass">
 
@@ -129,7 +124,6 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
       &--big2
         font-size: 2.2rem
 
-
   .weatherIcon
     padding: 0 0 26px 0
     &__image
@@ -140,6 +134,5 @@ const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
     &__text
       margin-top: -30px
       font-size: 2rem
-
 
 </style>

@@ -10,7 +10,6 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import EventBus from '@/path/to/bus'
 
   @Component({
     data() {
