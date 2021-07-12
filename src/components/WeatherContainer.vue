@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="weatherIcon">
-        <div class="weatherIcon__image" v-bind:style="{backgroundImage: 'url(http://openweathermap.org/img/wn/'+ icon + '@2x.png'}"></div>
+        <div class="weatherIcon__image" v-bind:style="{backgroundImage: 'url(https://openweathermap.org/img/wn/'+ icon + '@2x.png'}"></div>
         <div class="weatherIcon__text">{{iconText}} </div>
       </div>
       <div class="weather">
@@ -46,7 +46,7 @@
 
 <script lang="ts">
 const API_KEY: string = '002d7b9d8a832684dc08c0d738d107bf';
-const OPENWEATHERMAP_URL: string = 'http://api.openweathermap.org/data/2.5/weather';
+const OPENWEATHERMAP_URL: string = 'https://api.openweathermap.org/data/2.5/weather';
 
 import Loader from '@/components/Loader.vue'
 
