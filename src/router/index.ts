@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/vueDemo/',
+    path: '/',
     name: 'Home',
     component: Home
   },
